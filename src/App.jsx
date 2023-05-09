@@ -1,38 +1,40 @@
 import { useState, useEffect } from 'react';
 import { Call } from './util/Data';
 import Box from './components/Box';
+import Cycler from './components/Cycler';
+import { Row } from './components/Basics';
 
 function App() {
-    const [lines, setLines] = useState([]);
+    const [deadlines, setDeadlines] = useState([]);
+    const [lifelines, setLifelines] = useState([]);
     const [newsfeed, setNewsfeed] = useState({});
 
     useEffect(() => {
         const call = async () => {
-            const presplit = Object.values(await Call());
-            console.log(presplit);
-            setLines(presplit.filter(e => e.type != 'newsfeed'));
+            const data = await Call();
+            setDeadlines(data.deadlines);
+            setLifelines(data.lifelines);
         };
 
         call();
     }, []);
 
-    useEffect(() => {
-        console.log(lines);
-    }, [lines]);
-
     return (
-        <>
-            {lines.map((k, i) => {
-                return (
-                    <Box
-                        box_type={k.flavor}
-                        box_titles={k.labels}
-                        box_data={k.timestamp}
-                        key={i}
-                    />
-                );
-            })}
-        </>
+        <Row>
+            <Cycler>
+                {deadlines.map((k, i) => {
+                    return <Box box_data={k} key={i} />;
+                })}
+            </Cycler>
+            <Cycler>
+                {lifelines.map((k, i) => {
+                    return <Box box_data={k} key={i} />;
+                })}
+            </Cycler>
+            {/* <Scroll>
+                insert newsfeed here
+            </Scroll> */}
+        </Row>
     );
 }
 
