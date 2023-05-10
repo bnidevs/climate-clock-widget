@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { DEADLINE, LIFELINE, TYPE_COLORS } from '../Constants';
+import { TYPE_COLORS } from '../Constants';
 import { Wranglers } from '../util/Data';
 
-import { Row } from './Basics';
+import { Row, Magnify } from './Basics';
 
 const DefaultBox = styled.div`
     font-family: katwijk_monoblack, Lucida Console, Monaco, monospace;
@@ -15,14 +15,25 @@ const TitleBox = styled(DefaultBox)`
     font-size: 1em;
     font-weight: 400;
     padding: 5px;
+
+    flex-grow: ${(props) => (props.fill ? 100 : 0)};
 `;
 
 const DataBox = styled(DefaultBox)`
-    font-size: 1em;
     font-weight: 400;
     padding: 5px;
     text-transform: uppercase;
+
+    display: flex;
+    align-items: flex-end;
 `;
+
+const UnitBox = styled(DefaultBox)`
+    font-size: 2em;
+    font-weight: 400;
+    padding: 3px;
+    text-transform: uppercase;
+`
 
 function BoxTop({ box_type, box_titles }) {
     return (
@@ -30,7 +41,7 @@ function BoxTop({ box_type, box_titles }) {
             <TitleBox color={TYPE_COLORS[box_type]}>
                 {box_type.toUpperCase()}
             </TitleBox>
-            <TitleBox color={TYPE_COLORS[box_type]} inverse={true}>
+            <TitleBox color={TYPE_COLORS[box_type]} inverse fill>
                 {box_titles[0].toUpperCase()}
             </TitleBox>
         </Row>
@@ -55,8 +66,8 @@ function BoxData({
 
     return (
         <DataBox color={TYPE_COLORS[box_type]}>
-            {currVal && Wranglers[data_type](currVal, data_resolution)}
-            {data_unit}
+            <Magnify text={currVal && Wranglers[data_type](currVal, data_resolution)}/>
+            <UnitBox>{data_unit}</UnitBox>
         </DataBox>
     );
 }
@@ -78,3 +89,4 @@ function Box({ box_data }) {
 }
 
 export default Box;
+export {DefaultBox};

@@ -10,6 +10,10 @@ const Wres = (res) => {
     return Math.round(-1 * (Math.log(res) / Math.log(10)));
 };
 
+const PrefZero = (num) => {
+    return `${num < 10 ? '0' : ''}${num}`
+}
+
 const Wranglers = {
     [DATA_TYPES.monetary]: (val, res) => {
         val = val.toFixed(Wres(res));
@@ -27,8 +31,8 @@ const Wranglers = {
             return whole;
         });
         const delins = ['yrs', 'days', ':', ':'];
-        let rtrn = delins.map((e, i) => `${wholes[i]}${e}`);
-        return rtrn.join('') + val.toString();
+        let rtrn = delins.map((e, i) => `${i > 1 ? PrefZero(wholes[i]) : wholes[i]}${e}`);
+        return rtrn.join('') + PrefZero(val);
     },
     [DATA_TYPES.other]: (val, res) => {
         val = val.toFixed(Wres(res));

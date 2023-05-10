@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Call } from './util/Data';
 import Box from './components/Box';
 import Cycler from './components/Cycler';
+import Media from './components/Media';
 import { Row } from './components/Basics';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             {/* <Scroll>
                 insert newsfeed here
             </Scroll> */}
+            <Media />
         </Row>
     );
 }
