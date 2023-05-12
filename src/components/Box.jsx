@@ -1,31 +1,30 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { TYPE_COLORS } from '../Constants';
+import { TYPE_COLORS, FONTS } from '../Constants';
 import { Wranglers } from '../util/Data';
 
-import { Row, Magnify } from './Basics';
+import { Row, Magnify, DefaultBox } from './Basics';
 
-const DefaultBox = styled.div`
-    font-family: katwijk_monoblack, Lucida Console, Monaco, monospace;
-    background-color: ${(props) => (props.inverse ? '#000' : props.color)};
-    color: ${(props) => (props.inverse ? props.color : '#000')};
-`;
+import '../static/App.css';
 
 const TitleBox = styled(DefaultBox)`
+    font-family: ${(props) => props.font}, Lucida Console, Monaco, monospace;
     font-size: 1em;
     font-weight: 400;
     padding: 5px;
 
-    flex-grow: ${(props) => (props.fill ? 100 : 0)};
+    flex-grow: ${(props) => (props.expand ? 100 : 0)};
 `;
 
 const DataBox = styled(DefaultBox)`
+    font-family: ${FONTS.BOLD}, Lucida Console, Monaco, monospace;
     font-weight: 400;
-    padding: 5px;
+    padding: 5px 5px 10px 5px;
     text-transform: uppercase;
 
     display: flex;
     align-items: flex-end;
+    height: 5em;
 `;
 
 const UnitBox = styled(DefaultBox)`
@@ -33,15 +32,20 @@ const UnitBox = styled(DefaultBox)`
     font-weight: 400;
     padding: 3px;
     text-transform: uppercase;
-`
+`;
 
 function BoxTop({ box_type, box_titles }) {
     return (
         <Row>
-            <TitleBox color={TYPE_COLORS[box_type]}>
+            <TitleBox color={TYPE_COLORS[box_type]} font={FONTS.BOLD}>
                 {box_type.toUpperCase()}
             </TitleBox>
-            <TitleBox color={TYPE_COLORS[box_type]} inverse fill>
+            <TitleBox
+                color={TYPE_COLORS[box_type]}
+                font={FONTS.REG}
+                inverse
+                expand
+            >
                 {box_titles[0].toUpperCase()}
             </TitleBox>
         </Row>
@@ -66,7 +70,9 @@ function BoxData({
 
     return (
         <DataBox color={TYPE_COLORS[box_type]}>
-            <Magnify text={currVal && Wranglers[data_type](currVal, data_resolution)}/>
+            <Magnify
+                text={currVal && Wranglers[data_type](currVal, data_resolution)}
+            />
             <UnitBox>{data_unit}</UnitBox>
         </DataBox>
     );
@@ -89,4 +95,4 @@ function Box({ box_data }) {
 }
 
 export default Box;
-export {DefaultBox};
+export { TitleBox };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Fill } from './Basics';
 
 function Cycler({ children }) {
     const [cycle, setCycle] = useState(0);
@@ -9,7 +10,7 @@ function Cycler({ children }) {
         }, 5000);
     }, [cycle]);
 
-    return <div>{children[cycle % children.length]}</div>;
+    return <Fill>{children[cycle % children.length]}</Fill>;
 }
 
 export default Cycler;

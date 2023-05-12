@@ -11,8 +11,8 @@ const Wres = (res) => {
 };
 
 const PrefZero = (num) => {
-    return `${num < 10 ? '0' : ''}${num}`
-}
+    return `${num < 10 ? '0' : ''}${num}`;
+};
 
 const Wranglers = {
     [DATA_TYPES.monetary]: (val, res) => {
@@ -31,7 +31,9 @@ const Wranglers = {
             return whole;
         });
         const delins = ['yrs', 'days', ':', ':'];
-        let rtrn = delins.map((e, i) => `${i > 1 ? PrefZero(wholes[i]) : wholes[i]}${e}`);
+        let rtrn = delins.map(
+            (e, i) => `${i > 1 ? PrefZero(wholes[i]) : wholes[i]}${e}`
+        );
         return rtrn.join('') + PrefZero(val);
     },
     [DATA_TYPES.other]: (val, res) => {

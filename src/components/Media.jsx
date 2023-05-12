@@ -1,32 +1,43 @@
 import styled from 'styled-components';
-import { Col } from './Basics';
-import { DefaultBox } from './Box';
-import { LIFELINE, TYPE_COLORS } from '../Constants';
+import { Col, DefaultBox } from './Basics';
+import { LIFELINE, TYPE_COLORS, FONTS } from '../Constants';
 import LogoSVG from '../assets/images/climateclock.svg';
 
 const LogoBox = styled.div`
+    display: flex;
     background-color: black;
-    padding: 5px;
-`
+    aspect-ratio: 1 / 1;
+    height: 100%;
+
+    justify-content: center;
+    align-items: center;
+`;
 
 const Logo = styled.img`
-    width: 6em;
-`
+    width: 75%;
+`;
 
 const Tagline = styled(DefaultBox)`
+    font-family: ${FONTS.REG}, Lucida Console, Monaco, monospace;
     text-align: center;
     padding: 5px;
-`
+    width: 7em;
+`;
 
-function Media() {
-    return (<Col>
+function LogoCtnr() {
+    return (
         <LogoBox>
             <Logo src={LogoSVG} />
         </LogoBox>
+    );
+}
+
+function TaglineCtnr() {
+    return (
         <Tagline color={TYPE_COLORS[LIFELINE]} inverse>
             #ActInTime
         </Tagline>
-    </Col>);
+    );
 }
 
-export default Media;
+export { LogoCtnr, TaglineCtnr };

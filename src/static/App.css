@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'katwijk_monoblack';
+    src: local('katwijk_monoblack'),
+        url(../assets/fonts/KatwijkMono-Black.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'katwijk_monolight';
+    src: local('katwijk_monolight'),
+        url(../assets/fonts/KatwijkMono-Light.otf) format('opentype');
+}
+
+.invis {
+    display: none;
+}
