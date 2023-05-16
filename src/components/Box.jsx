@@ -19,7 +19,7 @@ const TitleBox = styled(DefaultBox)`
 const DataBox = styled(DefaultBox)`
     font-family: ${FONTS.BOLD}, Lucida Console, Monaco, monospace;
     font-weight: 400;
-    padding: 5px 5px 10px 5px;
+    padding: 5px 5px 10px 15px;
     text-transform: uppercase;
 
     display: flex;
